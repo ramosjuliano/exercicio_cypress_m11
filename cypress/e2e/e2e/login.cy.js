@@ -1,7 +1,8 @@
 ///<reference types="cypress" />
+const perfil = require('../../fixtures/perfil.json');
 
 beforeEach(() => {
-  cy.visit('http://lojaebac.ebaconline.art.br/minha-conta/')
+  cy.visit('minha-conta/')
 });
 
 afterEach(() => {
@@ -13,6 +14,7 @@ context('Funcionalidade Login', () => {
     cy.get('#username').type('aluno_ebac@teste.com')
     cy.get('#password').type('teste@teste.com')
     cy.get('.woocommerce-form > .button').click()
+
     cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá,')
   })
 
@@ -29,5 +31,23 @@ context('Funcionalidade Login', () => {
     cy.get('.woocommerce-form > .button').click()
     cy.get('.woocommerce-error > li').should('contain', 'Erro: a senha fornecida para ')
   })
+
+  it('Deve fazer login com sucesso - Usando banco de Dados', () => {
+    cy.get('#username').type(perfil.usuario)
+    cy.get('#password').type(perfil.senha)
+    cy.get('.woocommerce-form > .button').click()
+
+    cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá,')
+  });
+
+  it('Deve Fazer Login com Sucesso - Usando Fixture', () => {
+    cy.fixture('perfil').then(dados => {
+      cy.get('#username').type(dados.usuario)
+      cy.get('#password').type(dados.senha, {log: false}) // Não deixa visível nos steps do teste
+      cy.get('.woocommerce-form > .button').click()
+
+    cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá,')
+    })
+  });
 
 })

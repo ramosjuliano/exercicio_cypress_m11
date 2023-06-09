@@ -4,12 +4,19 @@
   "description": "Exercício Módulo 11 - Engenheiro de Qualidade de Software",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:run": "npx cypress run --browser chrome",
+    "cy:open": "npx cypress open",
+    "cy:report": "npx cypress run --record --key a7c354da-925f-45a7-95ab-4299abdbdaa2"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "cypress": "^12.13.0"
+  },
+  "dependencies": {
+    "faker": "^5.5.3"
   }
 }

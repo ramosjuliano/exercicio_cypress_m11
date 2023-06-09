@@ -2,7 +2,7 @@
 
 describe('Página de Produto', () => {
   beforeEach(() => {
-    cy.visit('http://lojaebac.ebaconline.art.br/produtos/')
+    cy.visit('produtos/')
   });
 
   it('Deve Selecionar um Produto da Lista', () => {
@@ -11,7 +11,7 @@ describe('Página de Produto', () => {
 
   });
 
-  it.only('Acrescentar um item ao carrinho', () => {
+  it('Acrescentar um item ao carrinho', () => {
     let quantity = 2
 
     cy.get('.product-block').first().click()
@@ -24,4 +24,7 @@ describe('Página de Produto', () => {
     cy.get('.woocommerce-message').should('contain', quantity)
   });
 
+  it('Deve adicionar um item ao Carrinho usando Comando Customizado', () => {
+    cy.addProdutos(2, 'M', 'Blue')
+  })
 });
